@@ -16,11 +16,23 @@
       height: 100vh;
     }
 
+    .image-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
     img {
       width: 200px;
       height: auto;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       transition: transform 0.3s ease;
+    }
+
+    .caption {
+      font-size: 40px;
+      color: #444;
+      margin-bottom: 20px;
     }
 
     .button-container {
@@ -55,8 +67,11 @@
 </head>
 <body>
 
-  <!-- 圖片 -->
-  <img id="pleadImage" src="crying_panda_1.png" alt="恩愛親親的熊熊" />
+  <!-- 圖片與文字 -->
+  <div class="image-container">
+    <img id="pleadImage" src="crying_panda_1.png" alt="恩愛親親的熊熊" />
+    <p class="caption" id="textView">我們可以和好嗎？</p>
+  </div>
 
   <!-- 按鈕 -->
   <div class="button-container">
@@ -68,8 +83,8 @@
     const leftButton = document.getElementById('leftButton');
     const rightButton = document.getElementById('rightButton');
     const pleadImage = document.getElementById('pleadImage');
+    const textView = document.getElementById('textView');
 
-    // 初始尺寸
     const initialFontSize = 24;
     const initialWidth = 200;
     const initialHeight = 100;
@@ -87,13 +102,12 @@
       "crying_panda_2.png",
       "crying_panda_3.png",
       "crying_panda_4.png",
-      "crying_panda_5.png",
+      "crying_panda_5.png"
     ];
 
     let phraseIndex = 0;
 
     rightButton.addEventListener('click', () => {
-      // 左邊按鈕放大
       size += 10;
       width += 30;
       height += 15;
@@ -101,11 +115,9 @@
       leftButton.style.width = `${width}px`;
       leftButton.style.height = `${height}px`;
 
-      // 右邊文字變化
       phraseIndex = (phraseIndex + 1) % phrases.length;
       rightButton.textContent = phrases[phraseIndex];
 
-      // 圖片變化：每兩次變一張
       const imageStage = Math.floor(phraseIndex / 2);
       if (imageStage < images.length) {
         pleadImage.src = images[imageStage];
@@ -113,7 +125,6 @@
     });
 
     leftButton.addEventListener('click', () => {
-      // 按一下左邊按鈕還原初始大小
       size = initialFontSize;
       width = initialWidth;
       height = initialHeight;
@@ -121,12 +132,10 @@
       leftButton.style.width = `${width}px`;
       leftButton.style.height = `${height}px`;
 
-      // 並且切回恩愛熊熊的圖片
       pleadImage.src = "happy_end.gif";
+      textView.innerText = "耶！我們和好了！";
 
       rightButton.style.display = "none";
-
-      // 重置文字索引
       phraseIndex = 0;
     });
   </script>
