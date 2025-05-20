@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>求原諒小劇場</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fdf6f8;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+      transition: transform 0.3s ease;
+    }
+
+    .button-container {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+    #leftButton, #rightButton {
+      border: none;
+      border-radius: 20px;
+      padding: 20px;
+      font-size: 24px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    #leftButton {
+      background-color: pink;
+      color: white;
+      width: 200px;
+      height: 100px;
+    }
+
+    #rightButton {
+      background-color: lightblue;
+      color: white;
+      width: 120px;
+      height: 100px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 圖片 -->
+  <img id="pleadImage" src="https://i.imgur.com/LS4yHgS.png" alt="求原諒中">
+
+  <!-- 按鈕 -->
+  <div class="button-container">
+    <button id="leftButton">和好</button>
+    <button id="rightButton">不要</button>
+  </div>
+
+  <script>
+    const leftButton = document.getElementById('leftButton');
+    const rightButton = document.getElementById('rightButton');
+    const pleadImage = document.getElementById('pleadImage');
+
+    let size = 24;
+    let width = 200;
+    let height = 100;
+
+    const phrases = [
+      "不要", "拜託", "再給一次機會", "不要這樣", "算我求你了",
+      "嗚嗚我錯了", "我會改的", "給我一次機會啦", "我會洗碗", "嗚嗚QQ😭"
+    ];
+
+    const images = [
+      "https://i.imgur.com/LS4yHgS.png",  // 初始圖片
+      "https://i.imgur.com/gLm06PA.png",  // 哭哭1
+      "https://i.imgur.com/TS8yqnv.png",  // 哭哭2
+      "https://i.imgur.com/XX4RKhp.png",  // 哭哭3
+      "https://i.imgur.com/8wG2dnx.png"   // 絕望
+    ];
+
+    let phraseIndex = 0;
+
+    rightButton.addEventListener('click', () => {
+      // 左邊變大
+      size += 10;
+      width += 30;
+      height += 15;
+      leftButton.style.fontSize = `${size}px`;
+      leftButton.style.width = `${width}px`;
+      leftButton.style.height = `${height}px`;
+
+      // 右邊文字變化
+      phraseIndex = (phraseIndex + 1) % phrases.length;
+      rightButton.textContent = phrases[phraseIndex];
+
+      // 圖片變化：每兩次變一張
+      const imageStage = Math.floor(phraseIndex / 2);
+      if (imageStage < images.length) {
+        pleadImage.src = images[imageStage];
+      }
+    });
+  </script>
+
+</body>
+</html>
