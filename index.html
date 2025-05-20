@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>求原諒小劇場</title>
   <style>
     body {
@@ -56,7 +56,7 @@
 <body>
 
   <!-- 圖片 -->
-  <img id="pleadImage" src="crying_panda_1.png" alt="求原諒中">
+  <img id="pleadImage" src="crying_panda_1.png" alt="恩愛親親的熊熊" />
 
   <!-- 按鈕 -->
   <div class="button-container">
@@ -69,9 +69,14 @@
     const rightButton = document.getElementById('rightButton');
     const pleadImage = document.getElementById('pleadImage');
 
-    let size = 24;
-    let width = 200;
-    let height = 100;
+    // 初始尺寸
+    const initialFontSize = 24;
+    const initialWidth = 200;
+    const initialHeight = 100;
+
+    let size = initialFontSize;
+    let width = initialWidth;
+    let height = initialHeight;
 
     const phrases = [
       "不要", "拜託", "再給一次機會", "不要這樣", "算我求你了",
@@ -79,16 +84,16 @@
     ];
 
     const images = [
-      	"crying_panda_2.png",
-	"crying_panda_3.png",
-	"crying_panda_4.png",
-	"crying_panda_5.png",
+      "crying_panda_2.png",
+      "crying_panda_3.png",
+      "crying_panda_4.png",
+      "crying_panda_5.png",
     ];
 
     let phraseIndex = 0;
 
     rightButton.addEventListener('click', () => {
-      // 左邊變大
+      // 左邊按鈕放大
       size += 10;
       width += 30;
       height += 15;
@@ -105,6 +110,24 @@
       if (imageStage < images.length) {
         pleadImage.src = images[imageStage];
       }
+    });
+
+    leftButton.addEventListener('click', () => {
+      // 按一下左邊按鈕還原初始大小
+      size = initialFontSize;
+      width = initialWidth;
+      height = initialHeight;
+      leftButton.style.fontSize = `${size}px`;
+      leftButton.style.width = `${width}px`;
+      leftButton.style.height = `${height}px`;
+
+      // 並且切回恩愛熊熊的圖片
+      pleadImage.src = "happy_end.gif";
+
+      rightButton.style.display = "none";
+
+      // 重置文字索引
+      phraseIndex = 0;
     });
   </script>
 
